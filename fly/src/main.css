@@ -292,7 +292,7 @@ h2{
 
 
     .videoDiv{
-        width:100%;
+        width:50%;
         .video{
             border-radius: 10rem;
         }
@@ -300,8 +300,9 @@ h2{
 
     .plane{
         position: absolute;
-        width: 60%;
-        top: 45%;
+        width: 38%;
+        top: 40%;
+        left: 28%;
     }
 }
 
