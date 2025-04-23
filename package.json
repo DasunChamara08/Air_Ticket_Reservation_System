@@ -1,0 +1,27 @@
+{
+  "name": "air_ticket_reservation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DasunChamara08/Air_Ticket_Reservation_System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DasunChamara08/Air_Ticket_Reservation_System/issues"
+  },
+  "homepage": "https://github.com/DasunChamara08/Air_Ticket_Reservation_System#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.2"
+  }
+}
