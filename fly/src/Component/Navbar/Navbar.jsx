@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-
-// Icons
 import { SiConsul } from "react-icons/si";
 import { BsPhoneVibrate } from "react-icons/bs";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { CgMenuGridO } from "react-icons/cg";
-
-// Image
 import logo from '../../assets/Logo01.png';
+import SignInModal from "../auth/SignInModal";
+import SignUpModal from '../auth/SignUpModal';
+
 
 const Navbar = () => {
-  const [active, setActive] = useState('navBarMenu'); // Mobile menu toggle
-  const [navBg, setNavBg] = useState('navBarTwo');    // Scroll-based background
+  const [active, setActive] = useState('navBarMenu');
+  const [navBg, setNavBg] = useState('navBarTwo');
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   const showNavBar = () => setActive('navBarMenu showNavBar');
   const removeNavBar = () => setActive('navBarMenu');
 
-  // Handle scroll to add background
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 10) {
@@ -31,8 +31,6 @@ const Navbar = () => {
 
   return (
     <div className="navBar flex">
-      
-      {/* Top Navigation */}
       <div className="navBarOne flex">
         <div className="logoDiv">
           <img src={logo} className="Logo" alt="Logo" />
@@ -45,12 +43,11 @@ const Navbar = () => {
         </div>
 
         <div className="atb flex">
-          <button className="authBtn">Sign In</button>
-          <button className="authBtn">Sign Up</button>
+          <button className="authBtn" onClick={() => setShowSignIn(true)}>Sign In</button>
+          <button className="authBtn" onClick={() => setShowSignUp(true)}>Sign Up</button>
         </div>
       </div>
 
-      {/* Bottom Navigation */}
       <div className={navBg}>
         <div className={active}>
           <ul className="menu flex">
@@ -73,6 +70,10 @@ const Navbar = () => {
           <CgMenuGridO className="icon" />
         </div>
       </div>
+
+      {/* Modals */}
+      {showSignIn && <SignInModal close={() => setShowSignIn(false)} />}
+      {showSignUp && <SignUpModal close={() => setShowSignUp(false)} />}
     </div>
   );
 };

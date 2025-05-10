@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server/server.js"
+    
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,9 @@
   },
   "homepage": "https://github.com/DasunChamara08/Air_Ticket_Reservation_System#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",

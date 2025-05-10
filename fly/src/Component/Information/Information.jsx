@@ -13,7 +13,7 @@ const Information = () => {
             
             <div>
               <h4>Phone</h4>
-              <p>+94 77 123 4567</p>
+              <p>+94 11 777 1 979</p>
               <p>+94 11 234 5678</p>
             </div>
           </div>
@@ -22,8 +22,8 @@ const Information = () => {
             <Mail className="info-icon" />
             <div>
               <h4>Email</h4>
-              <p>support@example.com</p>
-              <p>info@example.com</p>
+              <p>support@srilankan.com</p>
+              <p>bookings@srilankan.com.</p>
             </div>
           </div>
 
@@ -31,7 +31,7 @@ const Information = () => {
             <Globe className="info-icon" />
             <div>
               <h4>Website</h4>
-              <p><a href="https://www.example.com" target="_blank" rel="noopener noreferrer">www.example.com</a></p>
+              <p><a href="https://www.srilankan.com/en_uk/lk" target="_blank" rel="noopener noreferrer">www.srilankan.lk</a></p>
             </div>
           </div>
 
@@ -39,7 +39,7 @@ const Information = () => {
             <MapPin className="info-icon" />
             <div>
               <h4>Address</h4>
-              <p>No. 123, Main Street, Colombo, Sri Lanka</p>
+              <p>"Airline Centre", Bandaranaike International Centre, Katunayake 11450, Sri Lanka</p>
             </div>
           </div>
 

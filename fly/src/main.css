@@ -312,6 +312,8 @@ h2{
     }
   }
   
+
+  
   
 
 /*Home Section styling*/
@@ -370,71 +372,77 @@ h2{
 
 /* Search Section Container */
 
-/* Push search section down from top */
-.search {
-    margin-top: 3rem;
-  }
+.searchContainer {
+  background: #ffffff;
+  padding: 2rem;
+  max-width: 850px;
+  margin: 100px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(144, 148, 187, 0.1);
   
-  /* Center the section horizontally and style it */
-  .search .sectionContainer {
-    max-width: 1000px;        /* Optional: Keeps layout neatly centered */
-    margin: 0 auto;           /* Center horizontally */
-    padding: 2rem;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #f8f8f8;
-    margin-bottom: 3rem;
-  
-    /* Apply fade-up animation on load */
-    animation: fadeUp 0.8s ease-out;
-  }
-  
-  /* Animation for fade-up on load */
-  @keyframes fadeUp {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Individual input containers */
-  .singleInput {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Styling for Trip Type radio buttons */
-  .btns label {
-    font-weight: bold;
-  }
-  
-  /* Passenger control buttons */
-  .passengerControl button {
-    padding: 0.3rem 0.8rem;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  /* Economy / Business Class buttons */
-  .singleBtn {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Highlight selected flight class */
-  .singleBtn.active {
-    background-color: #007bff;
-    color: white;
-  }
-            
+}
+
+.tripType {
+  display: flex;
+  justify-content: flex-start;
+  gap: 75px; /* space between radio options */
+  margin-bottom: 1rem;
+}
+
+.row {
+  display: flex;
+  gap: 75px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.inputBox {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputBox label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.inputBox input,
+.inputBox select,
+.inputBox .react-datepicker-wrapper,
+.inputBox .react-select-container {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.searchBtn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  background-color: #003064;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.searchBtn:hover {
+  background-color: #0056b3;
+}
+
+.searchBtn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+
   
   /*Support Styling*/
   /* ################### Support.css ################### */
@@ -748,11 +756,11 @@ h2{
 /*Information Styling*/
 /* ========== General Section Styling ========== */
 .info-section {
-    background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+    background: linear-gradient(150deg, #fdfeff, #1093df);
     padding: 50px 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-  
+
   /* ========== Container Centering ========== */
   .info-container {
     max-width: 1000px;
@@ -954,3 +962,76 @@ h2{
         }
        } 
     }
+
+
+
+
+/* Sign In & Sign Up Section */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal form {
+  background: #ffffff;
+  width: 400px; /* Increased width */
+  padding: 2.5rem 3rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Add a simple slide-in animation */
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Optional enhancements for input fields and buttons */
+.modal form input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.modal form input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+.modal form button {
+  padding: 0.75rem 1rem;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal form button:hover {
+  background-color: #0056b3;
+}
+
+
