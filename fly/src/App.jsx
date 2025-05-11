@@ -6,6 +6,7 @@ import Navbar from "./Component/Navbar/Navbar";
 import Subscribers from "./Component/Subscribers/Subscribers"
 import Footer from "./Component/Footer/Footer";
 import Information from "./Component/Information/Information";
+import Slider from "./Component/Slider/Slider";
 
 
 
@@ -20,7 +21,7 @@ const App =() =>{
       <Subscribers/>
       <Information />
       <Footer />
-      
+      <Slider />
       
       
     </div>
