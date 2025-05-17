@@ -1,40 +1,63 @@
-// Import necessary modules
-const dotenv = require("dotenv").config();  // Load environment variables
-const express = require("express");  // Import express
-const { errorHandler } = require("./middleware/errorHandler");  // Import custom error handler
-const path = require("path");  // Import path module for handling file paths
-const app = express();  // Create an express app
-const connectDB = require("./config/db");  // Import database connection function
-const userRoutes = require("./routes/userRoutes");  // Import user routes
-const cookieParser = require("cookie-parser");  // Import cookie parser middleware
+// Load environment variables from .env file
+const dotenv = require("dotenv").config();
 
-const port = process.env.PORT || 5000;  // Set the port from environment variables or default to 5000
+// Import express for server creation
+const express = require("express");
 
-// Connect to the database
+// Import custom error handling middleware
+const { errorHandler } = require("./middleware/errorHandler");
+
+// Node.js path module for handling file and directory paths
+const path = require("path");
+
+// Create an Express application instance
+const app = express();
+
+// Import database connection function
+const connectDB = require("./config/db");
+
+// Import user routes
+const userRoutes = require("./routes/userRoutes");
+
+// Import cookie parser middleware to parse cookies in requests
+const cookieParser = require("cookie-parser");
+
+// Set the server port from environment variable or default to 5000
+const port = process.env.PORT || 5000;
+
+// Connect to MongoDB database
 connectDB();
 
-// Setup middleware
-app.use(cookieParser());  // Use cookie parser middleware
-app.use(express.json());  // Parse incoming JSON requests
+// Middleware to parse cookies from incoming requests
+app.use(cookieParser());
 
-// Setup routes
-// app.use("/api/rooms", roomRoutes);  // Define routes for rooms
-app.use("/api/users", userRoutes);  // Define routes for users
+// Middleware to parse incoming JSON requests to JavaScript objects
+app.use(express.json());
 
-// Setup production environment
+// Setup API routes for user-related endpoints
+app.use("/api/users", userRoutes);
+
+// Serve frontend static files in production mode
 if (process.env.NODE_ENV === "production") {
-  const publicpath = path.join(__dirname, ".", "build");  // Set up the path to static files
-  const filePath = path.resolve(__dirname, ".", "build", "index.html");  // Resolve the path to the index.html
-  app.use(express.static(publicpath));  // Serve static files
+  // Path to the React build folder
+  const publicPath = path.join(__dirname, "build");
 
-  // Handle all other routes to serve the index.html
+  // Absolute path to index.html of React build
+  const filePath = path.resolve(__dirname, "build", "index.html");
+
+  // Serve static files from React build
+  app.use(express.static(publicPath));
+
+  // Handle any route that doesn't match an API route by sending React's index.html
   app.get("*", (req, res) => {
-    return res.sendFile(filePath);
+    res.sendFile(filePath);
   });
 }
 
-// Use custom error handler
+// Use custom error handling middleware at the end of middleware stack
 app.use(errorHandler);
 
-// Start the server
-app.listen(port, () => console.log(`listening on port ${port}`));
+// Start server and listen on specified port
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});

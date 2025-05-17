@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
+
+// Import user controller functions
 const userController = require("../controllers/userController");
 
-router.get("/", userController.getUsers);
+// POST /api/users/register - Create a new user
 router.post("/register", userController.createUser);
-router.post("/login", userController.loginUser);
-router.get("/logout", userController.logoutUser);
+
+// You can add more user routes here, e.g., login, logout, profile
 
 module.exports = router;

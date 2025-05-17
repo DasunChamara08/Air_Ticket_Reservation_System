@@ -1,24 +1,21 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
+// Define user schema
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    isAdmin: {
-        type: Boolean,
-        default: true
-    }
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  // Add more fields if needed
 }, {
-    timestamps: true
-})
+  timestamps: true,
+});
 
-module.exports = mongoose.model("User", userSchema)
+// Create user model
+const User = mongoose.model("User", userSchema);
+
+// Export model functions you use in controller
+module.exports = {
+  findOne: (query) => User.findOne(query),
+  create: (data) => User.create(data),
+  // Add other methods if needed
+};

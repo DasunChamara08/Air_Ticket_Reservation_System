@@ -4,7 +4,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // Font Awesome Reac
 import { SiRclone } from 'react-icons/si';
 import DutyFree from '../../assets/DutyFree1.png'; // adjust path as needed
 import Insurance from '../../assets/Insurance1.png';
-import Meal from '../../assets/Meal11.png';
+import Meal from '../../assets/SLmeal.png';
 import NFree from '../../assets/NFree.jpg';
 import Space from '../../assets/Space.jpg';
 
@@ -32,36 +32,36 @@ const Carousel = () => {
         {/* Slide Items */}
         <div className="item" style={{ backgroundImage: `url(${DutyFree})` }}>
           <div className="content">
-            <div className="name">Switzerland</div>
-            <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
+            <div className="name">Pre-Order Your Duty-Free</div>
+            <div className="des">You can easily pre order your favorit duty-free items.</div>
             <button>See More</button>
           </div>
         </div>
         <div className="item" style={{ backgroundImage: `url(${Insurance})` }}>
           <div className="content">
-            <div className="name">Finland</div>
+            <div className="name">Travel Insurance</div>
             <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
             <button>See More</button>
           </div>
         </div>
         <div className="item" style={{ backgroundImage: `url(${Meal})` }}>
           <div className="content">
-            <div className="name">Iceland</div>
+            <div className="name">Pre-Order your meal</div>
             <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
             <button>See More</button>
           </div>
         </div>
         <div className="item" style={{ backgroundImage: `url(${NFree})` }}>
           <div className="content">
-            <div className="name">Australia</div>
-            <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
+            <div className="name">Neighbour free seats</div>
+            <div className="des">Fly in comfort with more space</div>
             <button>See More</button>
           </div>
         </div>
         <div className="item" style={{ backgroundImage: `url(${Space})` }}>
           <div className="content">
-            <div className="name">Netherland</div>
-            <div className="des">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!</div>
+            <div className="name">Advance Seat Reservation</div>
+            <div className="des">Window or Aisle Seat? Reserve your seat in advance</div>
             <button>See More</button>
           </div>
         </div>
