@@ -1,63 +1,30 @@
-// Load environment variables from .env file
-const dotenv = require("dotenv").config();
-
-// Import express for server creation
+// server.js
 const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const userRoutes = require("./routes/userRoutes");
+require("dotenv").config();
 
-// Import custom error handling middleware
-const { errorHandler } = require("./middleware/errorHandler");
-
-// Node.js path module for handling file and directory paths
-const path = require("path");
-
-// Create an Express application instance
 const app = express();
 
-// Import database connection function
-const connectDB = require("./config/db");
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/myapp", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
-// Import user routes
-const userRoutes = require("./routes/userRoutes");
-
-// Import cookie parser middleware to parse cookies in requests
-const cookieParser = require("cookie-parser");
-
-// Set the server port from environment variable or default to 5000
-const port = process.env.PORT || 5000;
-
-// Connect to MongoDB database
-connectDB();
-
-// Middleware to parse cookies from incoming requests
+// Middleware
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+}));
+app.use(express.json());
 app.use(cookieParser());
 
-// Middleware to parse incoming JSON requests to JavaScript objects
-app.use(express.json());
-
-// Setup API routes for user-related endpoints
+// Routes
 app.use("/api/users", userRoutes);
 
-// Serve frontend static files in production mode
-if (process.env.NODE_ENV === "production") {
-  // Path to the React build folder
-  const publicPath = path.join(__dirname, "build");
-
-  // Absolute path to index.html of React build
-  const filePath = path.resolve(__dirname, "build", "index.html");
-
-  // Serve static files from React build
-  app.use(express.static(publicPath));
-
-  // Handle any route that doesn't match an API route by sending React's index.html
-  app.get("*", (req, res) => {
-    res.sendFile(filePath);
-  });
-}
-
-// Use custom error handling middleware at the end of middleware stack
-app.use(errorHandler);
-
-// Start server and listen on specified port
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

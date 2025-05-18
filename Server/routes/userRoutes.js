@@ -1,12 +1,19 @@
+// userRoutes.js (in /routes folder)
 const express = require("express");
-const router = express.Router();
+const router = express.Router(); // MUST define router!
 
-// Import user controller functions
-const userController = require("../controllers/userController");
+const userController = require("../controllers/userController"); // make sure path is correct
 
-// POST /api/users/register - Create a new user
+// Get all users (example route, optional)
+router.get("/", userController.getUsers);
+
+// Register a new user
 router.post("/register", userController.createUser);
 
-// You can add more user routes here, e.g., login, logout, profile
+// Login user
+router.post("/login", userController.loginUser);
+
+// Logout user
+router.get("/logout", userController.logoutUser);
 
 module.exports = router;

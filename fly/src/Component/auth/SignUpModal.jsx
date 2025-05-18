@@ -1,34 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-// SignUpModal receives a 'close' function prop to close the modal when needed
 const SignUpModal = ({ close }) => {
-  // Form state for controlled inputs: name, email, password
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ name: "", email: "", password: "", role: "user" });
 
-  // Update form state when any input changes
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission for signup
   const handleSignUp = async (e) => {
-    e.preventDefault(); // Prevent page reload
-
+    e.preventDefault();
     try {
-      // POST request to backend API to register user
-      const response = await axios.post("http://localhost:5000/api/users/register" , form);
-
+      await axios.post("http://localhost:5000/api/users/register", form);
       alert("Registration successful!");
-      console.log("User data:", response.data);
-
-      // Close modal on success
       close();
     } catch (error) {
-      // Extract error message safely
-      const errorMessage =
-        error.response?.data?.message || error.message || "Unknown error";
-      alert("Registration failed: " + errorMessage);
+      alert("Registration failed: " + (error.response?.data?.message || error.message));
     }
   };
 
@@ -36,31 +23,16 @@ const SignUpModal = ({ close }) => {
     <div className="modal">
       <form onSubmit={handleSignUp}>
         <h3>Sign Up</h3>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-          minLength={6} // Add minimum password length for better validation
-        />
+        <input name="name" value={form.name} onChange={handleChange} placeholder="Name" required />
+        <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Email" required />
+        <input name="password" type="password" value={form.password} onChange={handleChange} placeholder="Password" required minLength={6} />
+        
+        {/* Optional role selection for testing */}
+        <select name="role" value={form.role} onChange={handleChange}>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+
         <button type="submit">Register</button>
         <button type="button" onClick={close}>Cancel</button>
       </form>

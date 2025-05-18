@@ -1,31 +1,38 @@
+// authMiddleware.js
 const jwt = require("jsonwebtoken");
-const User = require("../models/userModel");
+const User = require("./userModel");
 
-const auth = async (req, res, next) => {
+// Middleware to protect routes by verifying JWT from cookies
+const protect = async (req, res, next) => {
   try {
-    const token = req.cookies.jwt;
+    const token = req.cookies.token;
     if (!token) {
-      return res.status(401).json({ message: "not authorized" });
+      return res.status(401).json({ message: "Not authorized, no token" });
     }
 
-    //  verify token
-    const data = jwt.verify(token, process.env.JWT_SECRET);
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "your_jwt_secret_key");
 
-    const user = await User.findById(data.id);
+    // Attach user info to request
+    req.user = await User.findById(decoded.id).select("-password");
 
-    if (!user) {
-      return res.status(400).json({ message: "not authorized" });
+    if (!req.user) {
+      return res.status(401).json({ message: "User not found" });
     }
-
-    req.user = user;
 
     next();
   } catch (error) {
-    console.log(error.message);
-    return res.status(400).json({ message: "no token" });
+    res.status(401).json({ message: "Not authorized, token failed" });
   }
 };
 
-module.exports = {
-  auth,
+// Middleware to check admin role
+const admin = (req, res, next) => {
+  if (req.user && req.user.role === "admin") {
+    next();
+  } else {
+    res.status(403).json({ message: "Require admin role" });
+  }
 };
+
+module.exports = { protect, admin };
