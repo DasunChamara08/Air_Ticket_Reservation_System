@@ -36,6 +36,11 @@ const Navbar = () => {
           <img src={logo} className="Logo" alt="Logo" />
         </div>
 
+        <div className="langSupport flex">
+          <li className="flex"><AiOutlineGlobal /> Language</li>
+          <li className="flex"><BsPhoneVibrate /> Support</li>
+        </div>
+
         <div className="none flex">
           <li className="flex">Home</li>
           <li className="flex"><AiOutlineGlobal /> Language</li>
@@ -59,10 +64,7 @@ const Navbar = () => {
           <button onClick={removeNavBar} className="btn flex btnOne">Contact</button>
         </div>
 
-        <div className="langSupport flex">
-          <li className="flex"><AiOutlineGlobal /> Language</li>
-          <li className="flex"><BsPhoneVibrate /> Support</li>
-        </div>
+        
 
         <button className="btn flex btnTwo">Contact</button>
 

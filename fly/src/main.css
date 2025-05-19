@@ -151,7 +151,7 @@ h2{
     }
   
     .Logo {
-      width: 155px;
+      width: 250px;
       height: auto;
       object-fit: contain;
     }
@@ -195,7 +195,7 @@ h2{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    top: 3rem;
+    top: 8rem;
     padding: 1.5rem 1rem;
     position: fixed;
     transition: 0.3s ease-in-out;
@@ -232,7 +232,11 @@ h2{
     }
   
     .btnTwo {
-      display: block;
+      display:flex;
+      margin-left: 78rem;
+      width: 95px;
+      height: 35px;
+      
     }
   
     .btnOne {

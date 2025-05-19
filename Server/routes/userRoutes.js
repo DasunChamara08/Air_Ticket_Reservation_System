@@ -1,19 +1,13 @@
-// userRoutes.js (in /routes folder)
-const express = require("express");
-const router = express.Router(); // MUST define router!
+// userRoutes.js
+const express = require("express");            // ✅ Import express
+const router = express.Router();               // ✅ Use Express's Router
 
-const userController = require("../controllers/userController"); // make sure path is correct
+const userController = require("../controllers/userController"); // ✅ Your correct path
 
-// Get all users (example route, optional)
+// Define routes
 router.get("/", userController.getUsers);
-
-// Register a new user
 router.post("/register", userController.createUser);
-
-// Login user
 router.post("/login", userController.loginUser);
-
-// Logout user
 router.get("/logout", userController.logoutUser);
 
 module.exports = router;

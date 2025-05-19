@@ -1,4 +1,3 @@
-// server.js
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -12,13 +11,14 @@ const app = express();
 mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/myapp", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+})
+.then(() => console.log("✅ MongoDB connected"))
+.catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true,
+  origin: "http://localhost:3000", // frontend origin (React)
+  credentials: true, // allow cookies to be sent
 }));
 app.use(express.json());
 app.use(cookieParser());
@@ -26,5 +26,6 @@ app.use(cookieParser());
 // Routes
 app.use("/api/users", userRoutes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Start server
+const PORT = process.env.PORT || 5173;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
