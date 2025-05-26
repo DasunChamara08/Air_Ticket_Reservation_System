@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// SignInModal handles user and admin login
+// Handles both user and admin login logic
 const SignInModal = ({ close }) => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
-  // Update input values
+  // Update email and password fields
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Handle login logic
+  // Handle sign-in
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
+      // Send login request
       const response = await axios.post(
         "http://localhost:5000/api/users/login",
         form,
@@ -24,21 +25,26 @@ const SignInModal = ({ close }) => {
 
       alert("Login successful");
 
-      const role = response.data.user.role;
-      close(); // Close the modal
+      // Extract user info
+      const { email, role } = response.data.user;
 
-      // Redirect based on user role
-      if (role === "admin") {
-        navigate("/admin");
+      close(); // Close modal after login
+
+      // Redirect admin to admin panel
+      if (
+        email === "adminaviationacticket@gmail.com" &&
+        role === "admin"
+      ) {
+        navigate("/admin"); // Redirect to AdminPanel.jsx route
       } else {
-        navigate("/");
+        navigate("/"); // Normal user redirect
       }
     } catch (err) {
       alert("Login failed: " + (err.response?.data?.message || err.message));
     }
   };
 
-  // Placeholder for forgot password
+  // Placeholder for forgot password (optional implementation)
   const handleForgotPassword = () => {
     alert("Redirecting to Forgot Password (to be implemented)");
   };

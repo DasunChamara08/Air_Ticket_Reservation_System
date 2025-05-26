@@ -1,51 +1,43 @@
-const mongoose = require("mongoose");
+// flightModel.js
 
-// Define schema for individual seat in a flight
-const seatSchema = new mongoose.Schema({
-  seatNumber: String, // e.g., "12A"
-  isBooked: {
-    type: Boolean,
-    default: false,
-  },
-  bookedDates: [Date], // dates this seat is booked for (can help with recurring flights)
-});
+import mongoose from 'mongoose';
 
-// Define schema for the flight
-const flightSchema = new mongoose.Schema({
-  flightNumber: {
-    type: String,
-    required: true,
-    unique: true,
+// Define the Flight schema with required fields
+const flightSchema = mongoose.Schema(
+  {
+    flightNumber: {
+      type: String,
+      required: true,
+    },
+    departureTime: {
+      type: String, // You can also use Date if it's full datetime
+      required: true,
+    },
+    arrivalTime: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: String, // You can also use Date type
+      required: true,
+    },
+    destination: {
+      type: String,
+      required: true,
+    },
+    flyingHours: {
+      type: String,
+      required: true,
+    },
+    specialNews: {
+      type: String,
+      default: '', // Optional field for delay or cancellation announcements
+    },
   },
-  airline: {
-    type: String,
-    required: true,
-  },
-  from: {
-    type: String,
-    required: true,
-  },
-  to: {
-    type: String,
-    required: true,
-  },
-  departureTime: {
-    type: Date,
-    required: true,
-  },
-  arrivalTime: {
-    type: Date,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  seats: [seatSchema], // Embedded list of seats
-  image: [String], // e.g., images of aircraft or airline logos
-  description: {
-    type: String,
-  },
-});
+  {
+    timestamps: true, // Automatically adds createdAt and updatedAt fields
+  }
+);
 
-module.exports = mongoose.model("Flight", flightSchema);
+// Create the Flight model from the schema
+export const Flight = mongoose.model('Flight', flightSchema);

@@ -1,18 +1,33 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-// SignUpModal registers only normal users (no admin)
+// SignUpModal handles sign-up for both user and admin (admin hidden, determined by email+password)
 const SignUpModal = ({ close }) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
-    role: "user" // Force role as user
+    role: "user", // default role is user
   });
 
   // Handle input updates
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Automatically set role to admin if specific credentials are entered
+    const updatedForm = { ...form, [name]: value };
+
+    // Check if credentials match admin
+    if (
+      updatedForm.email === "adminaviationacticket@gmail.com" &&
+      updatedForm.password === "AdminAC@IT"
+    ) {
+      updatedForm.role = "admin";
+    } else {
+      updatedForm.role = "user";
+    }
+
+    setForm(updatedForm);
   };
 
   // Handle registration logic
@@ -23,7 +38,10 @@ const SignUpModal = ({ close }) => {
       alert("Registration successful!");
       close();
     } catch (error) {
-      alert("Registration failed: " + (error.response?.data?.message || error.message));
+      alert(
+        "Registration failed: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
@@ -59,11 +77,13 @@ const SignUpModal = ({ close }) => {
           minLength={6}
         />
 
-        {/* Hidden input to lock the role as 'user' */}
-        <input type="hidden" name="role" value="user" />
+        {/* Hidden input to submit role (user or admin) */}
+        <input type="hidden" name="role" value={form.role} />
 
         <button type="submit">Register</button>
-        <button type="button" onClick={close}>Cancel</button>
+        <button type="button" onClick={close}>
+          Cancel
+        </button>
       </form>
     </div>
   );
