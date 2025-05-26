@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+
+// AdminPanel component for admin-only functionality
 const AdminPanel = () => {
   const [flights, setFlights] = useState([]);
   const [news, setNews] = useState("");
 
+  // Fetch flight data from API
   const fetchFlights = async () => {
     const res = await axios.get("http://localhost:5173/api/flights");
     setFlights(res.data);
@@ -14,44 +17,57 @@ const AdminPanel = () => {
     fetchFlights();
   }, []);
 
+  // Delete a flight
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:5173/api/flights/${id}`);
-    fetchFlights();
+    fetchFlights(); // Refresh list
   };
 
+  // Update announcement/news content
   const handleNewsUpdate = async () => {
     await axios.post("http://localhost:5173/api/news", { content: news });
-    alert("News updated");
+    alert("News updated successfully!");
   };
 
   return (
-    <div className="admin-panel">
-      <h2>Admin Panel</h2>
+    <div className="admin-dashboard">
+      <h2>✈️ Admin Dashboard</h2>
 
-      <section>
-        <h3>Create Flight</h3>
-        {/* You would build a full form here */}
-        <button onClick={() => alert("Create form here")}>+ Add Flight</button>
-      </section>
+      <div className="dashboard-section">
+        {/* Flight creation section */}
+        <div className="card">
+          <h3>Create Flight</h3>
+          <button className="btn" onClick={() => alert("Show create flight form")}>+ Add Flight</button>
+        </div>
 
-      <section>
-        <h3>Manage Flights</h3>
-        <ul>
-          {flights.map((flight) => (
-            <li key={flight._id}>
-              {flight.name} - {flight.time}
-              <button onClick={() => alert("Edit logic")}>Edit</button>
-              <button onClick={() => handleDelete(flight._id)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      </section>
+        {/* Flight list and management */}
+        <div className="card">
+          <h3>Manage Flights</h3>
+          <ul>
+            {flights.map((flight) => (
+              <li key={flight._id} className="flight-item">
+                <span>{flight.name} - {flight.time}</span>
+                <div>
+                  <button className="btn-small" onClick={() => alert("Edit flight logic")}>Edit</button>
+                  <button className="btn-small danger" onClick={() => handleDelete(flight._id)}>Delete</button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <section>
-        <h3>Update News / Special Announcement</h3>
-        <textarea value={news} onChange={(e) => setNews(e.target.value)} rows="4" />
-        <button onClick={handleNewsUpdate}>Update</button>
-      </section>
+        {/* News and announcement section */}
+        <div className="card">
+          <h3>News / Special Announcement</h3>
+          <textarea
+            value={news}
+            onChange={(e) => setNews(e.target.value)}
+            rows="4"
+            placeholder="Write news or announcements..."
+          />
+          <button className="btn" onClick={handleNewsUpdate}>Update News</button>
+        </div>
+      </div>
     </div>
   );
 };

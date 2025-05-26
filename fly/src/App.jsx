@@ -7,6 +7,7 @@ import Subscribers from "./Component/Subscribers/Subscribers"
 import Footer from "./Component/Footer/Footer";
 import Information from "./Component/Information/Information";
 import Slider from "./Component/Slider/Slider";
+//import AdminPanel from "./Component/AdminPanel/AdminPanel";
 
 
 
@@ -22,7 +23,7 @@ const App =() =>{
       <Information />
       <Footer />
       <Slider />
-      
+            
       
     </div>
   )

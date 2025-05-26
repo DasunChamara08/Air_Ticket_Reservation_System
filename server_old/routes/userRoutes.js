@@ -1,24 +1,32 @@
-const { Router } = require("express");  // Import Router from express
-const {
-  getUsers,
-  createUser,
-  loginUser,
-  logoutUser,
-} = require("../controllers/userController");  // Import controller functions
-const { auth } = require("../middleware/authMiddleware");  // Import authentication middleware
+// // userRoutes.js
+// const express = require("express");            // ✅ Import express
+// const router = express.Router();               // ✅ Use Express's Router
 
-const router = Router();  // Create a new router
+// //const userController = require("../controllers/userController.js"); // ✅ Your correct path
 
-// Get all users (protected route)
-router.get("/", auth, getUsers);
+// const userController = require("../controllers/userController");
 
-// Create a new user
-router.post("/", createUser);
 
-// Login a user
-router.post("/login", loginUser);
+// // Define routes
+// router.get("/", userController.getUsers);
+// router.post("/register", userController.createUser);
+// router.post("/login", userController.loginUser);
+// router.get("/logout", userController.logoutUser);
 
-// Logout a user
-router.get("/logout", logoutUser);
+// console.log("userController loaded:", userController);
 
-module.exports = router;  // Export the router
+// module.exports = router;
+
+
+// const express = require("express");
+// const router = express.Router();
+
+// const userController = require("../controllers/userController.js"); // Fix this path too
+
+// // Routes
+// router.get("/", userController.getUsers);
+// router.post("/register", userController.createUser);
+// router.post("/login", userController.loginUser);
+// router.get("/logout", userController.logoutUser);
+
+// module.exports = router;

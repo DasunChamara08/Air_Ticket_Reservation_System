@@ -1,27 +1,28 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+// SignUpModal registers only normal users (no admin)
 const SignUpModal = ({ close }) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
-    role: "user", // Force all signups to be users
+    role: "user" // Force role as user
   });
 
+  // Handle input updates
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Handle registration logic
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      // Send form data to the registration API
-      await axios.post("http://localhost:5173/api/users/register", form);
+      await axios.post("http://localhost:5000/api/users/register", form);
       alert("Registration successful!");
-      close(); // Close the modal after success
+      close();
     } catch (error) {
-      // Show a friendly error message
       alert("Registration failed: " + (error.response?.data?.message || error.message));
     }
   };
@@ -58,8 +59,7 @@ const SignUpModal = ({ close }) => {
           minLength={6}
         />
 
-        {/* Role selection removed to prevent admin sign-up from UI */}
-        {/* Hidden input to keep role as 'user' */}
+        {/* Hidden input to lock the role as 'user' */}
         <input type="hidden" name="role" value="user" />
 
         <button type="submit">Register</button>

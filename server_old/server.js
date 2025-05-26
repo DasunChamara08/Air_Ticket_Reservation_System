@@ -1,39 +1,32 @@
-const dotenv = require("dotenv").config();
 const express = require("express");
-const { errorHandler } = require("./middleware/errorHandler");
-const path = require("path");
-const app = express();
-const connectDB = require("./config/db");
-const roomRoutes = require("./routes/roomRoutes");
-// const bookingRoutes = require("./routes/bookingRoutes");
-const userRoutes = require("./routes/userRoutes");
+const mongoose = require("mongoose");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
+// const userRoutes = require("./routes/userRoutes.js");
+require("dotenv").config();
 
-const port = process.env.PORT || 5000;
+const app = express();
 
-// connect to database
-connectDB();
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/myapp", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("✅ MongoDB connected"))
+.catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// setup middlewares
-app.use(cookieParser());
+// Middleware
+app.use(cors({
+  origin: "http://localhost:3000", // frontend origin (React)
+  credentials: true, // allow cookies to be sent
+}));
 app.use(express.json());
+app.use(cookieParser());
 
-// setup routes
-app.use("/api/rooms", roomRoutes);
-app.use("/api/bookings", bookingRoutes);
-app.use("/api/users", userRoutes);
+// Routes
+// app.use("/api/users", userRoutes);
 
-// setup production
-if (process.env.NODE_ENV === "production") {
-  const publicpath = path.join(__dirname, ".", "build");
-  const filePath = path.resolve(__dirname, ".", "build", "index.html");
-  app.use(express.static(publicpath));
+// Start server
+const PORT = process.env.PORT || 5173;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
-  app.get("*", (req, res) => {
-    return res.sendFile(filePath);
-  });
-}
-
-app.use(errorHandler);
-
-app.listen(port, () => console.log(`listening on on port ${port}`));
