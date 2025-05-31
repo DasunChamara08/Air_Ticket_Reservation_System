@@ -10,7 +10,7 @@ const {
   createBooking,       // Create a new flight booking
   updateBooking,       // Update existing booking details
   deleteBooking,       // Delete a specific booking
-  getSingleBooking     // Get a specific booking by ID
+  getSingleBooking,    // Get a specific booking by ID
 } = require("../controllers/bookingController");
 
 // Creating a new Express router instance

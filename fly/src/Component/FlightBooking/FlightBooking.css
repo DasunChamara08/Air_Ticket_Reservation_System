@@ -1,0 +1,99 @@
+/* .seat-map {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  user-select: none;
+}
+
+.seat-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.seat {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1.5px solid #004aad;
+  background-color: #d7e5ff;
+  color: #004aad;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.seat:hover:not(:disabled) {
+  background-color: #a1c2ff;
+}
+
+.seat.booked {
+  background-color: #888888;
+  color: white;
+  cursor: not-allowed;
+  border-color: #555555;
+}
+
+.seat.selected {
+  background-color: #004aad;
+  color: white;
+  border-color: #002d75;
+}
+
+.selected-seats-summary {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #004aad;
+  text-align: center;
+} */
+
+.flight-booking-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #f5f9ff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.flight-booking-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #004aad;
+}
+
+.flight-detail {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.flight-detail strong {
+  color: #004aad;
+}
+
+.no-flight-message {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 1.2rem;
+  color: #a00;
+}
+
+.back-button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: #004aad;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #002d75;
+}
