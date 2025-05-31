@@ -86,26 +86,36 @@
 
 
 
-import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import { FaUser } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaSearch, FaUser } from "react-icons/fa";
 import logo from '../../assets/Logo01.png';
 import SignInModal from '../auth/SignInModal';
 import SignUpModal from '../auth/SignUpModal';
 
 const Navbar = () => {
+  // State to control text size zoom levels
+  const [textSize, setTextSize] = useState('md');
+
+  // State to control showing modals
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
+  // Apply text zoom size when state changes
+  useEffect(() => {
+    document.body.classList.remove('zoom-sm', 'zoom-md', 'zoom-lg');
+    document.body.classList.add(`zoom-${textSize}`);
+  }, [textSize]);
+
   return (
     <header className="sri-navbar">
-      {/* Left: Logo */}
+      {/* 🌐 Left: Logo */}
       <div className="logo-section">
-        <img src={logo} className="logo-img" />
+        <img src={logo} className="logo-img" alt="SriLankan Airlines" />
+        {/* You can add partner logos here if needed */}
         {/* <img src="/oneworld.png" alt="Oneworld Alliance" className="oneworld-img" /> */}
       </div>
 
-      {/* Center: Menu */}
+      {/* 🧭 Center: Navigation Menu */}
       <ul className="nav-menu">
         <li>Home</li>
         <li>Search</li>
@@ -113,53 +123,78 @@ const Navbar = () => {
         <li>Support</li>
       </ul>
 
-      {/* Right: Icons & Login */}
+      {/* 🎯 Right: Actions */}
       <div className="nav-actions">
+        {/* 🔍 Search Icon */}
         <FaSearch className="icon" />
+
+        {/* 🔠 Text Resize Controls */}
         <div className="text-resize">
-          <span className="a-sm">A</span>
-          <span className="a-md">A</span>
-          <span className="a-lg">A</span>
+          <span className="a-sm" onClick={() => setTextSize('sm')}>A</span>
+          <span className="a-md" onClick={() => setTextSize('md')}>A</span>
+          <span className="a-lg" onClick={() => setTextSize('lg')}>A</span>
         </div>
-        <span className="lang-select">🇱🇰 EN ▾</span>
 
-        {/* 🔽 Login Dropdown - Updated
-        <div className="login-link relative group cursor-pointer">
-          <FaUser className="icon" />
-          <span>Login</span> */}
+       {/* 🌐 Language Selector Dropdown */}
+<div className="language-selector">
+  <label htmlFor="country">Choose your country/region and language</label>
+  <div className="language-controls">
+    {/* Country Dropdown */}
+    <select className="dropdown country-dropdown">
+      <option value="lk">🇱🇰 Sri Lanka</option>
+      <option value="jp">🇯🇵 Japan</option>
+      <option value="kr">🇰🇷 South Korea</option>
+      <option value="kw">🇰🇼 Kuwait</option>
+      <option value="my">🇲🇾 Malaysia</option>
+    </select>
 
-          {/* Hover Dropdown for Sign In / Sign Up */}
-          <div className="absolute hidden group-hover:block bg-white shadow-lg rounded px-4 py-2 top-full right-0 z-50">
+    {/* Language Dropdown */}
+    <select className="dropdown language-dropdown">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="jp">日本語</option>
+      <option value="en-uk">English (UK)</option>
+      <option value="en-us">English (US)</option>
+    </select>
+
+    {/* Go Button */}
+    <button className="go-btn">Go</button>
+  </div>
+</div>
+
+
+
+        {/* 👤 Login Buttons (You can wrap this in a dropdown later) */}
+        <div className="login-buttons">
             <button
               onClick={() => setShowSignIn(true)}
-              className="block text-left text-sm text-gray-800 hover:text-blue-600 w-full"
+              className="login-link"
             >
               Sign In
             </button>
+
             <button
               onClick={() => setShowSignUp(true)}
-              className="block text-left text-sm text-gray-800 hover:text-green-600 w-full"
+              className="login-link"
             >
               Sign Up
             </button>
-          </div>
-        </div>
-      
+          </div>    
 
-      {/* 🔽 Modals */}
+      </div>
+
+      {/* 📦 Sign In Modal */}
       {showSignIn && (
-        <SignInModal
-          close={() => setShowSignIn(false)}
-        />
+        <SignInModal close={() => setShowSignIn(false)} />
       )}
 
+      {/* 📦 Sign Up Modal */}
       {showSignUp && (
-        <SignUpModal
-          close={() => setShowSignUp(false)}
-        />
+        <SignUpModal close={() => setShowSignUp(false)} />
       )}
     </header>
   );
 };
 
 export default Navbar;
+

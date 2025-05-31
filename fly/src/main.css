@@ -131,7 +131,10 @@ h2{
 
 
 /* Navigation Bar Styling */
-/* Normal CSS for Navbar */
+
+/* ===============================
+   Navbar Container
+================================= */
 .sri-navbar {
   width: 100%;
   position: fixed;
@@ -145,6 +148,9 @@ h2{
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* ===============================
+   Logo Section
+================================= */
 .logo-section {
   display: flex;
   align-items: center;
@@ -159,6 +165,9 @@ h2{
   height: 70px;
 } */
 
+/* ===============================
+   Center Menu Items
+================================= */
 .nav-menu {
   display: flex;
   gap: 24px;
@@ -176,6 +185,9 @@ h2{
   text-decoration: underline;
 }
 
+/* ===============================
+   Right Actions Section
+================================= */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -183,6 +195,7 @@ h2{
   font-size: 13px;
 }
 
+/* Icons */
 .icon {
   color: #4b5563;
   cursor: pointer;
@@ -192,37 +205,113 @@ h2{
   color: #0366d6;
 }
 
+/* ===============================
+   Text Resize Buttons
+================================= */
 .text-resize span {
-  margin: 0 4px;
-  color: #000;
+  margin: 0 1px;
+  color: #0d0366;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.text-resize span:hover {
+  background-color: #e5e7eb; /* Tailwind's gray-200 */
 }
 
 .a-sm {
-  font-size: 10px;
+  font-size: 17px;
 }
 
 .a-md {
-  font-size: 13px;
+  font-size: 20px;
   font-weight: 600;
 }
 
 .a-lg {
-  font-size: 16px;
+  font-size: 28px;
   font-weight: 700;
 }
 
-.lang-select {
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
+
+/* Language Selector Section */
+.language-selector {
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
 }
 
-.login-link {
+.language-controls {
   display: flex;
+  gap: 8px;
   align-items: center;
-  color: #0366d6;
-  gap: 4px;
+}
+
+.dropdown {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.go-btn {
+  background-color: #0366d6;
+  color: white;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.go-btn:hover {
+  background-color: #004080;
+}
+
+
+
+/* Container to display buttons side by side */
+.login-buttons {
+ display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  /* background-color: #004080; */
+  /* color: white;
+  padding: 8px 20px;           /* Wider for oval shape */
+  /*border-radius: 999px;        /* Max value for full oval */
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  border: none;
+  text-align: center;
+  white-space: nowrap; 
+}
+
+
+/* ===============================
+   Zoom Scaling (applied on body)
+================================= */
+body.zoom-sm {
+  font-size: 14px;
+  zoom: 0.9;
+}
+
+body.zoom-md {
+  font-size: 16px;
+  zoom: 1;
+}
+
+body.zoom-lg {
+  font-size: 18px;
+  zoom: 1.1;
 }
 
   
